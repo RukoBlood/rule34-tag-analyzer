@@ -1,7 +1,6 @@
 package com.rule34analyzer.model;
 
 public class DailyStats {
-
     private int total;
     private int ai;
 

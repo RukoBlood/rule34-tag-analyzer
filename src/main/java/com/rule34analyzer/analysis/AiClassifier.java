@@ -6,7 +6,6 @@ public final class AiClassifier {
     private AiClassifier() {}
 
     public static boolean isAi(Rule34Post post) {
-        return post.tags().contains("ai_generated")
-            || post.tags().contains("ai_assisted");
+        return post.tags().contains("ai_generated") || post.tags().contains("ai_assisted");
     }
 }

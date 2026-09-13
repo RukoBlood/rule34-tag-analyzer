@@ -6,12 +6,9 @@ import com.rule34analyzer.localization.Localization;
 import com.rule34analyzer.model.*;
 import javafx.application.Platform;
 import javafx.geometry.*;
-import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

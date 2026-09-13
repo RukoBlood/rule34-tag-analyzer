@@ -14,17 +14,25 @@ Built with Java 21 + JavaFX + Gradle + Gson.
 ```
 
 ## Build
-./gradlew build, but you can't run jar directly
+./gradlew build
 
-## Run
+## Run (In IDE or without compiling it.)
 ./gradlew run
-
-On Windows:
+or
 gradlew.bat run
+
+## Run (Compiled JAR)
+`java -jar jarname.jar`
+
+You can find jar in build/libs. Note: Run 10mb one, not 300kb one. 300kb is not shadowJar
+
+## Notes
+- Don't run without vpn if you are Russian (or if in your country r34 is blocked because child safety o algo). 
+- You can't change localization for now through settings. But you can change it in MainView class under lang field. 
+- Use only OpenJDK 21 or higher. Do not use Java 1.0-20, especially official/TLauncher bundled Java 8.
 
 ## Notes (ChatGPT)
 - AI classification is per post: ai_generated OR ai_assisted = one AI post.
 - AI percentage is rounded upward to two decimal places.
 - Localization lives in src/main/resources/lang/.
 - The blocked-IP warning is shown when the API request fails. The app does not inspect or store the user's IP.
-- Add Inter font files to src/main/resources/fonts/ for bundled typography.
