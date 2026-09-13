@@ -1,0 +1,88 @@
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-Regular.ttf");
+}
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-SemiBold.ttf");
+}
+.root, .label, .button, .text-field, .chart {
+    -fx-font-family: "Inter";
+}
+.app {
+    -fx-background-color: linear-gradient(to bottom right, #0a0f0c, #101812);
+}
+.header { -fx-alignment: center-left; }
+.title {
+    -fx-font-size: 25px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ecfff1;
+}
+.text-field {
+    -fx-background-color: #151e18;
+    -fx-text-fill: #e9fff0;
+    -fx-prompt-text-fill: #68756d;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-color: #26372d;
+    -fx-padding: 11 16;
+    -fx-pref-height: 42;
+}
+.search-bar { -fx-padding: 4; }
+.pill-button {
+    -fx-background-color: linear-gradient(to right, #1f9d55, #42c96d);
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-background-radius: 22;
+    -fx-padding: 11 22;
+    -fx-cursor: hand;
+}
+.pill-button:hover { -fx-opacity: 0.88; }
+.cards { -fx-alignment: center-left; }
+.card {
+    -fx-background-color: #121a15;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: #24342a;
+    -fx-padding: 14 20;
+    -fx-min-width: 150;
+}
+.card-value {
+    -fx-font-size: 23px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #eaffef;
+}
+.muted { -fx-text-fill: #819087; }
+.percentage {
+    -fx-font-size: 30px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffd84d;
+}
+.message {
+    -fx-font-size: 14px;
+    -fx-text-fill: #c9d5ce;
+}
+.status { -fx-text-fill: #718078; }
+.warning {
+    -fx-background-color: #332d12;
+    -fx-border-color: #6e5d18;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 12 16;
+}
+.warning .label { -fx-text-fill: #ffe68a; }
+
+.chart {
+    -fx-background-color: transparent;
+}
+.chart-plot-background { -fx-background-color: #0d1410; }
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: #1c2820;
+}
+.axis {
+    -fx-tick-label-fill: #738078;
+}
+.axis-label { -fx-text-fill: #89968e; }
+.chart-legend { -fx-background-color: transparent; }
+.chart-legend-item { -fx-text-fill: #b8c4bc; }
