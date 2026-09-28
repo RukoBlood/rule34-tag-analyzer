@@ -8,6 +8,7 @@
   "message.low": "Мало ИИ арта.",
   "message.balanced": "ИИ арты в пределах баланса.",
   "message.high": "ИИ преобладает.",
+  "message.very_high": "В основном арты сгенерированы ИИ.",
   "message.extreme": "USSE AI, спасать бесполезно.",
   "message.only_ai": "Ты точно не ищешь ai_generated??",
   "tag.character": "Персонаж",

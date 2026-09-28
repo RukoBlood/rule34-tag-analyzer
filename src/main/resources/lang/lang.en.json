@@ -8,6 +8,7 @@
   "message.low": "Little AI art.",
   "message.balanced": "AI art is within balance.",
   "message.high": "AI dominates.",
+  "message.very_high": "Mostly AI generated.",
   "message.extreme": "USSE AI, there's no point saving it.",
   "message.only_ai": "Are you sure you're not looking for ai_generated??",
   "tag.character": "Character",

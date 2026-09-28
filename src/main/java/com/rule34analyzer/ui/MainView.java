@@ -156,7 +156,8 @@ public class MainView {
         int p = pct.intValue();
         if (pct.compareTo(BigDecimal.valueOf(100)) >= 0) return lang.get("message.only_ai");
         if (p >= 90) return lang.get("message.extreme");
-        if (p >= 70) return lang.get("message.high");
+        if (p >= 70) return lang.get("message.very_high");
+        if (p >= 50) return lang.get("message.high");
         if (p >= 30) return lang.get("message.balanced");
         if (pct.compareTo(BigDecimal.ZERO) > 0) return lang.get("message.low");
         return lang.get("message.zero");
