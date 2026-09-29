@@ -17,48 +17,14 @@ import java.util.concurrent.TimeUnit;
 public class Rule34Client {
 
     private static final String API = "https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1";
-    private static final String API_KEY_RESOURCE = "/please_use_your_own_api_key.json";
-
+    //private static final String API_KEY_RESOURCE = "/please_use_your_own_api_key.json"; //Removed old section.
     private final HttpClient http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(15)).build();
+    private final String apiKey;
 
-    /**
-     * Loads api key from json
-     */
-    private String loadApiKey() throws IOException {
-
-        try (InputStream input = Rule34Client.class.getResourceAsStream(API_KEY_RESOURCE)) {
-            if (input == null) {
-                throw new IOException("Не найден файл " + API_KEY_RESOURCE + ". Поместите please_use_your_own_api_key.json " + "в src/main/resources.");
-            }
-
-            JsonElement root;
-
-            try (InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8)) {
-                root = JsonParser.parseReader(reader);
-            } catch (Exception e) {
-                throw new IOException("Не удалось прочитать please_use_your_own_api_key.json: " + e.getMessage(), e);
-            }
-
-            if (!root.isJsonObject()) {
-                throw new IOException("please_use_your_own_api_key.json должен содержать JSON-объект.");
-            }
-
-            JsonObject json = root.getAsJsonObject();
-
-            if (!json.has("api_key")) {
-                throw new IOException("В please_use_your_own_api_key.json отсутствует поле \"api_key\".");
-            }
-
-            String apiKey = json.get("api_key").getAsString();
-
-            if (apiKey == null || apiKey.isBlank()) {
-                throw new IOException("Поле \"api_key\" в please_use_your_own_api_key.json пустое.");
-            }
-
-            return apiKey;
-        }
+    public Rule34Client(String apiKey) {
+        if (apiKey == null || apiKey.isBlank()) throw new IllegalArgumentException("API credentials are missing");
+        this.apiKey = apiKey;
     }
-
     /**
      * Get posts.
      *
@@ -70,7 +36,6 @@ public class Rule34Client {
 
         String encodedTag = URLEncoder.encode(tag, StandardCharsets.UTF_8);
 
-        String apiKey = loadApiKey();
 
         String url = API
                 + apiKey

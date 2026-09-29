@@ -2,8 +2,10 @@ package com.rule34analyzer.ui;
 
 import com.rule34analyzer.analysis.*;
 import com.rule34analyzer.api.Rule34Client;
+import com.rule34analyzer.config.ConfigManager;
 import com.rule34analyzer.localization.Localization;
 import com.rule34analyzer.model.*;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.geometry.*;
 import javafx.scene.chart.*;
@@ -13,10 +15,14 @@ import javafx.scene.layout.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class MainView {
     private final VBox root = new VBox();
-    private final Localization lang = new Localization("ru");
+    private final Localization lang;
+    private final ConfigManager.Config config;
+    private final Consumer<ConfigManager.Config> onConfigChanged;
+    private final HostServices hostServices;
     private final TextField search = new TextField();
     private final Button analyze = new Button();
     private final Label status = new Label();
@@ -27,19 +33,40 @@ public class MainView {
     private final LineChart<String, Number> chart;
     private final VBox warning = new VBox();
 
-    public MainView() {
-        root.getStylesheets().add(
-            getClass().getResource("/style.css").toExternalForm()
-        );
+    public MainView(ConfigManager.Config config, Consumer<ConfigManager.Config> onConfigChanged, HostServices hostServices) {
+        this.config = config;
+        this.lang = new Localization(config.language);
+        this.onConfigChanged = onConfigChanged;
+        this.hostServices = hostServices;
+
+        root.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         root.getStyleClass().add("app");
 
-        HBox header = new HBox();
+        HBox header = new HBox(12);
         header.getStyleClass().add("header");
         Label title = new Label(lang.get("app.title"));
         title.getStyleClass().add("title");
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        header.getChildren().addAll(title, spacer);
+        //header.getChildren().addAll(title, spacer);
+        Button settings = new Button(lang.get("settings.title"));
+        Button about = new Button(lang.get("about.title"));
+        settings.getStyleClass().add("pill-button");
+        about.getStyleClass().add("pill-button");
+        settings.setOnAction(e ->
+                SettingsDialog.show(config, lang).ifPresent(updated -> {
+                    try {
+                        ConfigManager.save(updated);
+                        onConfigChanged.accept(updated);
+                    } catch (Exception ex) {
+                        new Alert(Alert.AlertType.ERROR, "Failed to save settings: " + ex.getMessage()).showAndWait();
+                    }
+                })
+        );
+        about.setOnAction(e -> AboutDialog.show(hostServices, lang, "1.1.0"));
+        header.getChildren().addAll(title, spacer, settings, about);
+
+
 
         HBox searchBar = new HBox(10);
         searchBar.setAlignment(Pos.CENTER);
@@ -110,7 +137,7 @@ public class MainView {
         Thread thread = new Thread(() -> {
             try {
                 AnalysisResult result = new TagAnalyzer(
-                    new Rule34Client(),
+                    new Rule34Client(config.api_key),
                     s -> Platform.runLater(() -> status.setText(s))
                 ).analyze(tag);
 

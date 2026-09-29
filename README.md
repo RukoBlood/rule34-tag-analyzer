@@ -3,7 +3,7 @@ Name stands for itself.
 
 Built with Java 21 + JavaFX + Gradle + Gson.
 
-## Setup:
+## Setup (Pre-1.2):
 1. Create `please_use_your_own_api_key.json` file in `src/main/resources`
 2. Create account on rule34.xxx and In account settings enable api key checkbox. After saving changes, copy an api key from textbox.
 3. And in `please_use_your_own_api_key.json` this: 
@@ -13,13 +13,14 @@ Built with Java 21 + JavaFX + Gradle + Gson.
 }
 ```
 
+## Setup (1.2+)
+- Follow the instructions on first startup.
+
 ## Build
-./gradlew build
+./gradlew build or ./gradlew clean ShadowJar
 
 ## Run (In IDE or without compiling it.)
-./gradlew run
-or
-gradlew.bat run
+./gradlew run or gradlew.bat run
 
 ## Run (Compiled JAR)
 `java -jar jarname.jar`

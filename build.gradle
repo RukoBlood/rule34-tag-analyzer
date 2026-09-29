@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.rule34analyzer'
-version = '1.1.0'
+version = '1.2.0'
 
 repositories {
     mavenCentral()
@@ -39,12 +39,15 @@ shadowJar {
     archiveClassifier.set('')
     archiveVersion.set(version)
 
+    exclude 'please_use_your_own_api_key.json'
+
     manifest {
         attributes(
                 'Main-Class': application.mainClass.get()
         )
     }
 }
+
 
 tasks.named('build') {
     dependsOn tasks.named('shadowJar')
