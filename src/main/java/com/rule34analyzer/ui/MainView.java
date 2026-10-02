@@ -63,7 +63,7 @@ public class MainView {
                     }
                 })
         );
-        about.setOnAction(e -> AboutDialog.show(hostServices, lang, "1.1.0"));
+        about.setOnAction(e -> AboutDialog.show(hostServices, lang, "1.2.0"));
         header.getChildren().addAll(title, spacer, settings, about);
 
 
